@@ -1,7 +1,10 @@
 'use client';
 
 import React from 'react';
+import { useLogStream } from './features/logs/hooks/use-log-stream';
 export default function HomePage() {
+
+const { logs } = useLogStream();
 
   return (
     <div className="flex flex-col gap-6">
