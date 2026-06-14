@@ -3,8 +3,8 @@ import { z } from 'zod';
 export const LogLevelSchema = z.enum(['info', 'warn', 'error', 'debug']);
 export type LogLevel = z.infer<typeof LogLevelSchema>;
 
-export const SERVICES = ['auth-service', 'payment-gateway', 'user-api', 'inventory-db', 'frontend-edge'];
-export type LogService = typeof SERVICES[number];
+export const Services = ['auth-service', 'payment-gateway', 'user-api', 'inventory-db', 'frontend-edge'];
+export type LogService = typeof Services[number];
 
 
 export const LogEntrySchema = z.object({

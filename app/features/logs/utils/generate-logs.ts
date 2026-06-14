@@ -1,6 +1,6 @@
-import { LogEntry, LogLevel, SERVICES } from '../schemas';
+import { LogEntry, LogLevel, Services } from '../schemas';
 
-const MESSAGES: Record<LogLevel, string[]> = {
+const messages: Record<LogLevel, string[]> = {
   info: ['User login successful', 'Cache hit for session token', 'Database connection verified', 'Worker sync completed'],
   warn: ['High memory threshold warning', 'API rate limit approaching for client IP', 'DB connection pool near limit'],
   error: ['Failed to process payment charge', 'Internal server error 500', 'Token verification expired', 'Database timeout'],
@@ -13,8 +13,8 @@ export function generateMockLogs(count: number): LogEntry[] {
 
   return Array.from({ length: count }, (_, index) => {
     const level = levels[Math.floor(Math.random() * levels.length)];
-    const service = SERVICES[Math.floor(Math.random() * SERVICES.length)];
-    const messageList = MESSAGES[level];
+    const service = Services[Math.floor(Math.random() * Services.length)];
+    const messageList = messages[level];
     const message = messageList[Math.floor(Math.random() * messageList.length)];
     
     let statusCode: number | undefined;
