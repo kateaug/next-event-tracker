@@ -2,11 +2,11 @@
 
 import React, { useMemo } from 'react';
 import { useSearchParams } from 'next/navigation'
-import { useLogStream } from './features/logs/hooks/use-log-stream';
-import { LogConsole } from './features/logs/components/log-console';
-import { ErrorDistribution } from './features/logs/components/error-distribution';
-import { SystemPerformance } from './features/logs/components/system-performance';
-import { LogFilters } from './features/logs/components/log-filters';
+import { useLogStream } from '../features/logs/hooks/use-log-stream';
+import { LogConsole } from '../features/logs/components/log-console';
+import { ErrorDistribution } from '../features/logs/components/error-distribution';
+import { SystemPerformance } from '../features/logs/components/system-performance';
+import { LogFilters } from '../features/logs/components/log-filters';
 
 export default function HomePage() {
   const { logs } = useLogStream();

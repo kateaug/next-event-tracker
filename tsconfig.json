@@ -13,15 +13,14 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",
     "paths": {
       "@/*": [
-        "./*"
+        "./src/*"
       ]
     },
     "types": [
@@ -36,6 +35,7 @@
   },
   "include": [
     "next-env.d.ts",
+    "src/global.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
