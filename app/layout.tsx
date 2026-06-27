@@ -3,7 +3,7 @@ import QueryProvider from './providers/query-provider';
 import '../styles/globals.css';
 
 export const metadata = {
-  title: 'Logs tracker console',
+  title: 'Earthquake tracker console',
   description: 'Logs platform.',
 };
 

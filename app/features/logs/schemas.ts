@@ -1,20 +1,21 @@
 import { z } from 'zod';
 
-export const LogLevelSchema = z.enum(['info', 'warn', 'error', 'debug']);
-export type LogLevel = z.infer<typeof LogLevelSchema>;
+export const SeveritySchema = z.enum(['info', 'notice', 'critical', 'fatal']);
+export type SeverityLevel = z.infer<typeof SeveritySchema>;
 
-export const Services = ['auth-service', 'payment-gateway', 'user-api', 'inventory-db', 'frontend-edge'];
-export type LogService = typeof Services[number];
-
-
-export const LogEntrySchema = z.object({
+export const NormalizedEventSchema = z.object({
   id: z.string(),
   timestamp: z.string(),
-  level: LogLevelSchema,
-  service: z.string(),
+  readableTime: z.string(),
+  source: z.string(),
+  category: z.string(),
+  severity: SeveritySchema,
+  title: z.string(),
   message: z.string(),
-  statusCode: z.number().optional(),
-  latencyMs: z.number().optional(),
+  metadata: z.object({
+    metricValue: z.number(),
+    secondaryLabel: z.string(),
+  }),
 });
 
-export type LogEntry = z.infer<typeof LogEntrySchema>;
+export type NormalizedEvent = z.infer<typeof NormalizedEventSchema>;

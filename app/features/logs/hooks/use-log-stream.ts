@@ -1,32 +1,25 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { generateMockLogs } from '../utils/generate-logs';
-import { LogEntry } from '../schemas';
+import { NormalizedEvent } from '../schemas';
 
-const LOG_QUERY_KEY = 'live-log-stream';
+const QUERY_KEY = 'observatory-feed';
 
 export function useLogStream() {
-  const [logs, setLogs] = useState<LogEntry[]>([]);
-  const searchParams = useSearchParams();
-  
-  const activeLevel = searchParams.get('level');
-  const activeService = searchParams.get('service');
-
-  // Initialize once on load
-  useEffect(() => {
-    setLogs(generateMockLogs(4000));
-  }, []);
-
-  useQuery({
-    queryKey: [LOG_QUERY_KEY, activeLevel, activeService],
+   const { data, isLoading, error } = useQuery<NormalizedEvent[]>({
+    queryKey: [QUERY_KEY],
     queryFn: async () => {
-      const freshLogs = generateMockLogs(3);
-      setLogs((prev) => [...freshLogs, ...prev].slice(0, 15000));
-      return freshLogs;
+      const res = await fetch('/api/logs');
+      if (!res.ok) throw new Error('Failed to resolve server telemetry dataset');
+      return res.json();
     },
-    refetchInterval: 1000,
+    staleTime: 30000,           
+    refetchInterval: 60000,     
+    refetchOnWindowFocus: false, 
+    initialData: [],
   });
 
-  return { logs };
+  return {
+    logs: data,
+    isLoading,
+    error,
+  };
 }

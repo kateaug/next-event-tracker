@@ -3,12 +3,11 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Settings, Terminal, ShieldAlert } from 'lucide-react';
+import { LayoutDashboard } from 'lucide-react';
 
-  const navItems = [
-    { label: 'Metrics Dashboard', href: '/', icon: LayoutDashboard },
-    { label: 'Live Console', href: '/console', icon: Terminal }
-  ];
+const navItems = [
+ { label: 'Metrics Workspace', href: '/', icon: LayoutDashboard }
+];
 
 export function SidebarNav() {
   const pathname = usePathname();
@@ -17,8 +16,8 @@ export function SidebarNav() {
     <aside className="w-64 bg-slate-900 border-r border-slate-800 flex flex-col justify-between h-screen sticky top-0 shrink-0 font-sans select-none">
       <div>
         <div className="p-6 border-b border-slate-800 flex items-center gap-2.5">
-          <div className="w-6 h-6 rounded-md bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-bold text-xs text-white">LF</div>
-          <span className="font-bold tracking-tight text-white text-base">LogFlow Engine</span>
+          <div className="w-10 h-6 rounded-md bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-bold text-xs text-white">LEM</div>
+          <span className="font-bold tracking-tight text-white text-base">Live Event Monitor</span>
         </div>
 
         <nav className="p-4 flex flex-col gap-1">

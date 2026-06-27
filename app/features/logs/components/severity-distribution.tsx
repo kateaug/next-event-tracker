@@ -2,26 +2,27 @@
 
 import React, { useMemo } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import { LogEntry } from '../schemas';
+import { NormalizedEvent } from '../schemas';
 
 const colours: Record<string, string> = {
-    INFO: '#10b981',
-    WARN: '#f59e0b',
-    ERROR: '#f43f5e',
-    DEBUG: '#60a5fa',
+  INFO: '#10b981',
+  NOTICE: '#38bdf8',
+  CRITICAL: '#f59e0b',
+  FATAL: '#f43f5e',
 };
 
-interface ErrorDistributionProps {
-  logs: LogEntry[];
+interface SeverityDistributionProps {
+  logs: NormalizedEvent[];
 }
 
-export function ErrorDistribution({ logs }: ErrorDistributionProps) {
+export function SeverityDistribution({ logs }: SeverityDistributionProps) {
   
   const chartData = useMemo(() => {
-    const counts: Record<string, number> = { info: 0, warn: 0, error: 0, debug: 0 };
-    
-    logs.slice(0, 1000).forEach((log) => {
-      if (counts[log.level] !== undefined) counts[log.level]++;
+    const counts: Record<string, number> = { info: 0, notice: 0, critical: 0, fatal: 0 };
+    logs.slice(0, 1000).forEach((event) => {
+      if (event.severity && counts[event.severity] !== undefined) {
+        counts[event.severity]++;
+      }
     });
 
     return Object.entries(counts).map(([name, value]) => ({ name: name.toUpperCase(), value }));
