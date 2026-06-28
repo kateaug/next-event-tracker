@@ -8,17 +8,16 @@ export function useLogStream() {
     queryKey: [QUERY_KEY],
     queryFn: async () => {
       const res = await fetch('/api/logs');
-      if (!res.ok) throw new Error('Failed to resolve server telemetry dataset');
+      if (!res.ok) throw new Error('Failed to load the data.');
       return res.json();
     },
     staleTime: 30000,           
     refetchInterval: 60000,     
-    refetchOnWindowFocus: false, 
-    initialData: [],
+    refetchOnWindowFocus: false
   });
 
   return {
-    logs: data,
+    logs: data ?? [],
     isLoading,
     error,
   };

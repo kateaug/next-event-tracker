@@ -14,13 +14,7 @@ export async function GET() {
     const response = await fetch(
       URL,
       { 
-        method: 'GET',
-        headers: {
-          'Cache-Control': 'public, max-age=60, stale-while-revalidate=59',
-        },
-        next: { 
-          revalidate: 60 
-        }
+        method: 'GET'
       }
     );
 
@@ -59,13 +53,7 @@ export async function GET() {
       (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
     );
 
-    return new NextResponse(JSON.stringify(activeStream), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'public, max-age=60, stale-while-revalidate=59',
-      },
-    });
+    return NextResponse.json(activeStream);
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

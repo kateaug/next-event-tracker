@@ -15,6 +15,7 @@ const activeLevel = searchParams.get('level') || '';
 const activeMinMag = Number(searchParams.get('minMag')) || 0; 
 
 const filteredLogs = useMemo(() => {
+  if (!logs || logs.length === 0) return [];
   return logs.filter((event) => {
     const matchLevel = !activeLevel || event.severity === activeLevel;
     const matchMagnitude = (event.metadata?.metricValue ?? 0) >= activeMinMag;
